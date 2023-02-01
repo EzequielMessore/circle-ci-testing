@@ -60,4 +60,7 @@ jobs:
 workflows:
   build:
     jobs:
+      - lint
+      - unit-test
+      - android-test
       - release-build
