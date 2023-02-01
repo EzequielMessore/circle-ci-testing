@@ -2,8 +2,8 @@ version: 2.1
 
 jobs:
   lint:
-    docker:
-      - image: android/android-docker
+    executor:
+      name: android/android-docker
     steps:
       - checkout
       - run:
