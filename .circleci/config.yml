@@ -3,17 +3,16 @@ orbs:
   android: circleci/android@2.1.2
 
 jobs:
-  parallel:
-    lint:
-      executor:
-        name: android/android-docker
-        tag: "2022.09"
-      steps:
-        - checkout
-        - run:
-            name: "Running our linter"
-            command: ./gradlew detekt
-    unit-test:
+  lint:
+    executor:
+      name: android/android-docker
+      tag: "2022.09"
+    steps:
+      - checkout
+      - run:
+          name: "Running our linter"
+          command: ./gradlew detekt
+  unit-test:
       executor:
         name: android/android-docker
         tag: "2022.09"
@@ -27,3 +26,4 @@ workflows:
   build:
     jobs:
       - lint
+      - unit-test
