@@ -30,7 +30,7 @@ android {
                 if(file.exists()) load(file.reader())
             }
 
-            System.getenv("keystore")
+            println("\n\n\n\n ---------- ${System.getenv("keystore")} ----------- \n\n\n\n")
             storeFile = file(System.getenv("keystore") ?: properties.getProperty("keystore"))
             storePassword = System.getenv("keystore_password") ?: properties.getProperty("keystore_password")
 
