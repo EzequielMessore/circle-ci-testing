@@ -1,10 +1,12 @@
 version: 2.1
+orbs:
+  android: circleci/android@2.1.2
 
 jobs:
   lint:
     executor:
       name: android/android-docker
-      tag: 2022.08.1
+      tag: 2022.09
     steps:
       - checkout
       - run:
