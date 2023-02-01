@@ -86,7 +86,6 @@ fun MainScreen() {
             ) {
                 CountableText(count = count)
             }
-
         }
     }
 }
