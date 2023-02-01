@@ -4,7 +4,7 @@ jobs:
   lint:
     executor:
       name: android/android-docker
-      tag: "2022.09"
+      tag: 2022.08.1
     steps:
       - checkout
       - run:
@@ -12,6 +12,6 @@ jobs:
           command: ./gradlew detekt
 
 workflows:
-  say-hello-workflow:
+  build:
     jobs:
       - lint
