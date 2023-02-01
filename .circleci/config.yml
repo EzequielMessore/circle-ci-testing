@@ -54,6 +54,7 @@ jobs:
           name: Assemble release build
           command: |
             ./gradlew assembleRelease
+            ls -la app/build/outputs/apk
       - store_artifacts:
           path: app/build/outputs/apk/app-release.apk
 
