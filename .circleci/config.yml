@@ -63,4 +63,8 @@ workflows:
       - lint
       - unit-test
       - android-test
-      - release-build
+      - release-build:
+          requires:
+            - lint
+            - unit-test
+            - android-test
