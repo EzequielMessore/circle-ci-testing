@@ -13,17 +13,35 @@ jobs:
           name: "Running our linter"
           command: ./gradlew detekt
   unit-test:
-      executor:
-        name: android/android-docker
-        tag: "2022.09"
-      steps:
-        - checkout
-        - run:
-            name: "Running our unit test"
-            command: ./gradlew test
+    executor:
+      name: android/android-docker
+      tag: "2022.09"
+    steps:
+      - checkout
+      - run:
+          name: "Running our unit test"
+          command: ./gradlew test
+  android-test:
+    executor:
+      name: android/android-machine
+      resource-class: large
+    steps:
+      - checkout
+      - android/create-avd:
+          avd-name: Android_29
+          system-image: system-images;android-29;default;x86
+          install: true
+      - android/start-emulator:
+          avd-name: Android_29
+          no-window: true
+          restore-gradle-cache-prefix: v1a
+      - android/run-tests
+      - android/save-gradle-cache:
+          cache-prefix: v1a
 
 workflows:
   build:
     jobs:
       - lint
       - unit-test
+      - android-test
