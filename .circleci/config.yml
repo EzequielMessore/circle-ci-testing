@@ -25,7 +25,7 @@ jobs:
     executor:
       name: android/android-machine
       resource-class: large
-      tag: "2022.09"
+      tag: "2021.10.1"
     steps:
       - checkout
       - android/create-avd:
