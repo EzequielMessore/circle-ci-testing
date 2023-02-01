@@ -24,10 +24,15 @@ android {
 
     signingConfigs {
         create("release") {
+            val file = rootProject.file("local.properties")
+
             val properties = Properties().apply {
-                val file = rootProject.file("local.properties")
                 load(file.reader())
             }
+
+            println(file)
+            println(properties)
+            println(System.getenv("keystore"))
 
             storeFile = file(System.getenv("keystore") ?: properties.getProperty("keystore"))
             storePassword = System.getenv("keystore_password") ?: properties.getProperty("keystore_password")
