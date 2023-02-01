@@ -29,11 +29,11 @@ android {
                 load(file.reader())
             }
 
-            storeFile = file(properties.getProperty("keystore"))
-            storePassword = properties.getProperty("keystore_password")
+            storeFile = file(System.getenv("keystore") ?: properties.getProperty("keystore"))
+            storePassword = System.getenv("keystore_password") ?: properties.getProperty("keystore_password")
 
-            keyAlias = properties.getProperty("key_alias")
-            keyPassword = properties.getProperty("key_password")
+            keyAlias = System.getenv("key_alias") ?: properties.getProperty("key_alias")
+            keyPassword = System.getenv("key_password") ?: properties.getProperty("key_password")
         }
     }
 
