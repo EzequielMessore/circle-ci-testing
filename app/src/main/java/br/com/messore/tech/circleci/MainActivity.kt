@@ -74,7 +74,7 @@ fun MainScreen() {
             ) {
                 Icon(
                     tint = Color.White,
-                    contentDescription = null,
+                    contentDescription = "Button Add",
                     imageVector = Icons.Rounded.Add,
                 )
             }
@@ -96,8 +96,8 @@ fun CountableText(count: Int) {
     Text(text = "Clicou $count vezes", style = TextStyle(color = Color.Black, fontSize = 30.sp))
 }
 
-@Preview(showBackground = true)
 @Composable
+@Preview(showBackground = true)
 fun DefaultPreview() {
     CIrcleCITestingTheme {
         MainScreen()
