@@ -55,17 +55,9 @@ android {
                 serviceCredentialsFile = rootProject.file("google-services-account.json").path
             }
 
-            println("\n\n\n\n\n\n\n --------------- " +
-                    "${rootProject.file("google-services-account.json").path}  " +
-                    "--------------- \n\n\n\n\n\n\n"
-            )
-
-            File("google-services-account.json").inputStream()
-                .bufferedReader().use {
-                    it.readText()
-                }.also {
-                    println(it)
-                }
+            val input = rootProject.file("google-services-account.json").inputStream()
+            val string = input.bufferedReader().use { it.readText() }
+            print("---------\n\n\n $string ----------- \n\n\n")
 
             isMinifyEnabled = false
             signingConfig = signingConfigs.getByName("release")
