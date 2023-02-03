@@ -52,12 +52,8 @@ android {
                 artifactType = "APK"
                 releaseNotes = "Something"
                 testers = "ezequielmessore@gmail.com, ezequielmessore.developer@gmail.com"
-                serviceCredentialsFile = rootProject.file("google-services-account.json").path
+                serviceCredentialsFile = "./google-services-account.json"
             }
-
-            val input = rootProject.file("google-services-account.json").inputStream()
-            val string = input.bufferedReader().use { it.readText() }
-            print("---------\n\n\n $string ----------- \n\n\n")
 
             isMinifyEnabled = false
             signingConfig = signingConfigs.getByName("release")
