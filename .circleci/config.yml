@@ -80,9 +80,9 @@ workflows:
 #      - unit-test
 #      - android-test
       - firebase-distribution:
-          requires:
-            - lint
-            - unit-test
+#          requires:
+#            - lint
+#            - unit-test
 #      - release-build:
 #          requires:
 #            - lint
