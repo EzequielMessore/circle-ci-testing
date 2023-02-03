@@ -78,7 +78,7 @@ workflows:
       - lint
       - unit-test
       - android-test
-      - firebase-distribution
+      - firebase-distribution:
           requires:
             - lint
             - unit-test
