@@ -41,6 +41,19 @@ jobs:
           path: ~/test-results
       - store_artifacts:
           path: ~/test-results/junit
+  firebase-distribution:
+    executor:
+      name: android/android-machine
+      tag: "2021.10.1"
+      steps:
+        - checkout
+        - android/restore-gradle-cache
+        - android/restore-build-cache
+        - run:
+            name: Distribute to firebase
+            command: |
+              ./gradlew assembleRelease appDistributionUploadRelease
+
   release-build:
     executor:
       name: android/android-machine
@@ -63,6 +76,10 @@ workflows:
       - lint
       - unit-test
       - android-test
+      - firebase-distribution:
+          requires:
+            - lint
+            - unit-test
       - release-build:
           requires:
             - lint

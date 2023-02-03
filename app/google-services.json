@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "1047984918401",
+    "firebase_url": "https://tupper-louca.firebaseio.com",
+    "project_id": "tupper-louca",
+    "storage_bucket": "tupper-louca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1047984918401:android:52e0eb1ee7ef73139e6280",
+        "android_client_info": {
+          "package_name": "br.com.messore.tech.circleci"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1047984918401-55r5llrd39eeqnfka0jg5jh4r1off4t6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeLhEl2QD1z5kFfyr5CO35DbRQmqpk6EY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1047984918401-55r5llrd39eeqnfka0jg5jh4r1off4t6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1047984918401:android:4c72e8d824e1d0f19e6280",
+        "android_client_info": {
+          "package_name": "br.com.messore.tech.thathatupperlouca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1047984918401-55r5llrd39eeqnfka0jg5jh4r1off4t6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeLhEl2QD1z5kFfyr5CO35DbRQmqpk6EY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1047984918401-55r5llrd39eeqnfka0jg5jh4r1off4t6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

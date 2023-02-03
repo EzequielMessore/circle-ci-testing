@@ -1,8 +1,12 @@
+import org.jetbrains.kotlin.konan.properties.hasProperty
 import java.util.Properties
 
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
+    id("com.google.firebase.appdistribution")
 }
 
 android {
@@ -22,15 +26,14 @@ android {
         }
     }
 
+    val properties = Properties().apply {
+        val file = rootProject.file("local.properties")
+        if (file.exists()) load(file.reader())
+    }
+
     signingConfigs {
         create("release") {
 
-            val properties = Properties().apply {
-                val file = rootProject.file("local.properties")
-                if(file.exists()) load(file.reader())
-            }
-
-            println("\n\n\n\n ---------- ${System.getenv("keystore")} ----------- \n\n\n\n")
             storeFile = file(System.getenv("keystore") ?: properties.getProperty("keystore"))
             storePassword = System.getenv("keystore_password") ?: properties.getProperty("keystore_password")
 
@@ -41,6 +44,16 @@ android {
 
     buildTypes {
         release {
+            firebaseAppDistribution {
+                val googleAppId = if (properties.hasProperty("google_app_id")) properties.getProperty("google_app_id")
+                else System.getenv("google_app_id")
+
+                appId = googleAppId
+                artifactType = "APK"
+                releaseNotes = "Something"
+                testers = "ezequielmessore@gmail.com, ezequielmessore.developer@gmail.com"
+            }
+
             isMinifyEnabled = false
             signingConfig = signingConfigs.getByName("release")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
@@ -82,6 +95,10 @@ dependencies {
     androidTestImplementation("androidx.test:runner:1.5.2")
     androidTestImplementation("androidx.test:rules:1.5.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    implementation(platform("com.google.firebase:firebase-bom:31.2.0"))
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
 
     //Compose
     implementation("androidx.activity:activity-compose:1.6.1")
