@@ -55,6 +55,18 @@ android {
                 serviceCredentialsFile = rootProject.file("google-services-account.json").path
             }
 
+            println("\n\n\n\n\n\n\n --------------- " +
+                    "${rootProject.file("google-services-account.json").path}  " +
+                    "--------------- \n\n\n\n\n\n\n"
+            )
+
+            File("google-services-account.json").inputStream()
+                .bufferedReader().use {
+                    it.readText()
+                }.also {
+                    println(it)
+                }
+
             isMinifyEnabled = false
             signingConfig = signingConfigs.getByName("release")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")

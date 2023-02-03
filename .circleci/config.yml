@@ -52,10 +52,10 @@ jobs:
           command: |
             echo $GOOGLE_SERVICES_ACCOUNT | base64 --decode > google-services-account.json
             cat google-services-account.json
-      - run:
-          name: Distribute to firebase
-          command: |
-            ./gradlew assembleRelease appDistributionUploadRelease
+#      - run:
+#          name: Distribute to firebase
+#          command: |
+#            ./gradlew assembleRelease appDistributionUploadRelease
 
   release-build:
     executor:
