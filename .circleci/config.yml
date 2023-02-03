@@ -43,12 +43,10 @@ jobs:
           path: ~/test-results/junit
   firebase-distribution:
     executor:
-      name: android/android-machine
-      tag: "2021.10.1"
+      name: android/android-docker
+      tag: "2022.09"
     steps:
       - checkout
-      - android/restore-gradle-cache
-      - android/restore-build-cache
       - run:
           name: Distribute to firebase
           command: |
