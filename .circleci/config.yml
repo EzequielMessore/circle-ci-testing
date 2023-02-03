@@ -75,15 +75,15 @@ jobs:
 workflows:
   build:
     jobs:
+      - lint
+      - unit-test
+      - android-test
       - firebase-distribution
-#      - lint
-#      - unit-test
-#      - android-test
-#          requires:
-#            - lint
-#            - unit-test
-#      - release-build:
-#          requires:
-#            - lint
-#            - unit-test
-#            - android-test
+          requires:
+            - lint
+            - unit-test
+      - release-build:
+          requires:
+            - lint
+            - unit-test
+            - android-test
