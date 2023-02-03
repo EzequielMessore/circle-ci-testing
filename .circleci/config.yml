@@ -76,10 +76,10 @@ jobs:
 workflows:
   build:
     jobs:
+      - firebase-distribution
 #      - lint
 #      - unit-test
 #      - android-test
-      - firebase-distribution:
 #          requires:
 #            - lint
 #            - unit-test
