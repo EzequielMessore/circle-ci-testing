@@ -45,14 +45,14 @@ jobs:
     executor:
       name: android/android-machine
       tag: "2021.10.1"
-      steps:
-        - checkout
-        - android/restore-gradle-cache
-        - android/restore-build-cache
-        - run:
-            name: Distribute to firebase
-            command: |
-              ./gradlew assembleRelease appDistributionUploadRelease
+    steps:
+      - checkout
+      - android/restore-gradle-cache
+      - android/restore-build-cache
+      - run:
+          name: Distribute to firebase
+          command: |
+            ./gradlew assembleRelease appDistributionUploadRelease
 
   release-build:
     executor:
