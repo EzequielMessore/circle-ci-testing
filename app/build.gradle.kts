@@ -52,6 +52,7 @@ android {
                 artifactType = "APK"
                 releaseNotes = "Something"
                 testers = "ezequielmessore@gmail.com, ezequielmessore.developer@gmail.com"
+                serviceCredentialsFile = "./google-services-account.json"
             }
 
             isMinifyEnabled = false
