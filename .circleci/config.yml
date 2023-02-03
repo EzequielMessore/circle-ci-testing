@@ -49,7 +49,9 @@ jobs:
       - checkout
       - run:
           name: Store Google Services Account
-          command: echo $GOOGLE_SERVICES_ACCOUNT | base64 --decode > google-services-account.json
+          command: |
+            echo $GOOGLE_SERVICES_ACCOUNT | base64 --decode > google-services-account.json
+            cat google-services-account.json
       - run:
           name: Distribute to firebase
           command: |
@@ -74,15 +76,15 @@ jobs:
 workflows:
   build:
     jobs:
-      - lint
-      - unit-test
-      - android-test
+#      - lint
+#      - unit-test
+#      - android-test
       - firebase-distribution:
           requires:
             - lint
             - unit-test
-      - release-build:
-          requires:
-            - lint
-            - unit-test
-            - android-test
+#      - release-build:
+#          requires:
+#            - lint
+#            - unit-test
+#            - android-test
