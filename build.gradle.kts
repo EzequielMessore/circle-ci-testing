@@ -5,6 +5,14 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version "1.22.0"
 }
 
+buildscript {
+    dependencies {
+        classpath("com.google.gms:google-services:4.3.15")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.2")
+        classpath("com.google.firebase:firebase-appdistribution-gradle:3.2.0")
+    }
+}
+
 dependencies {
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.22.0")
 }

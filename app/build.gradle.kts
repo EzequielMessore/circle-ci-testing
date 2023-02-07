@@ -1,6 +1,12 @@
+import org.jetbrains.kotlin.konan.properties.hasProperty
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
+    id("com.google.firebase.appdistribution")
 }
 
 android {
@@ -11,8 +17,8 @@ android {
         applicationId = "br.com.messore.tech.circleci"
         minSdk = 24
         targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 3
+        versionName = "1.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -20,9 +26,37 @@ android {
         }
     }
 
+    val properties = Properties().apply {
+        val file = rootProject.file("local.properties")
+        if (file.exists()) load(file.reader())
+    }
+
+    signingConfigs {
+        create("release") {
+
+            storeFile = file(System.getenv("keystore") ?: properties.getProperty("keystore"))
+            storePassword = System.getenv("keystore_password") ?: properties.getProperty("keystore_password")
+
+            keyAlias = System.getenv("key_alias") ?: properties.getProperty("key_alias")
+            keyPassword = System.getenv("key_password") ?: properties.getProperty("key_password")
+        }
+    }
+
     buildTypes {
         release {
+            firebaseAppDistribution {
+                val googleAppId = if (properties.hasProperty("google_app_id")) properties.getProperty("google_app_id")
+                else System.getenv("google_app_id")
+
+                appId = googleAppId
+                artifactType = "APK"
+                releaseNotes = "Another version"
+                testers = "ezequielmessore@gmail.com, ezequielmessore.developer@gmail.com"
+                serviceCredentialsFile = "./google-services-account.json"
+            }
+
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -62,6 +96,10 @@ dependencies {
     androidTestImplementation("androidx.test:runner:1.5.2")
     androidTestImplementation("androidx.test:rules:1.5.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    implementation(platform("com.google.firebase:firebase-bom:31.2.0"))
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
 
     //Compose
     implementation("androidx.activity:activity-compose:1.6.1")

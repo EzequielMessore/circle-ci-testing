@@ -52,7 +52,7 @@ fun MainScreen() {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Testing Circle CI") },
+                title = { Text("\uD83D\uDE0D Testing Circle CI \uD83D\uDE0D") },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer
                 )
@@ -86,7 +86,6 @@ fun MainScreen() {
             ) {
                 CountableText(count = count)
             }
-
         }
     }
 }
