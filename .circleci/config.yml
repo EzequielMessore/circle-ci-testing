@@ -1,25 +1,14 @@
 version: 2.1
-
-commands:
-  print:
-    parameters:
-      message:
-        type: string
-    steps:
-      - run: echo << parameters.message >>
+orbs:
+  android: circleci/android@2.1.2
 
 jobs:
-  daily-message:
-    machine: true
-    parameters:
-      message:
-        type: string
+  build:
+    machine:
+      image: ubuntu-2004:2023.04.2
+    environment:
+      GIT_URL: << pipeline.project.git_url >>
     steps:
-      - print:
-          message: Printing << parameters.message >>
-
-workflows:
-  my-workflow:
-    jobs:
-      - daily-message:
-         message: echo << parameters.message >>
+      - run: |
+          echo $TESTING_VALUE
+          echo $GIT_URL
