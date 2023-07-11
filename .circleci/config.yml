@@ -1,6 +1,4 @@
 version: 2.1
-orbs:
-  android: circleci/android@2.1.2
 
 commands:
   print:
@@ -11,9 +9,17 @@ commands:
       - run: echo << parameters.message >>
 
 jobs:
-  build:
-    machine:
-      image: ubuntu-2004:2023.04.2
+  daily-message:
+    machine: true
+    parameters:
+      message:
+        type: string
     steps:
-      - run: echo $TESTING_VALUE
-      - run: echo ${GOOGLE_SERVICES_ACCOUNT}
+      - print:
+          message: Printing << parameters.message >>
+
+workflows:
+  my-workflow:
+    jobs:
+      - daily-message:
+         message: echo << parameters.message >>
