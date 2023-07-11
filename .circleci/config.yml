@@ -7,6 +7,7 @@ jobs:
     environment:
       GIT_URL: << pipeline.project.git_url >>
     steps:
+      - checkout
       - run: |
           echo $TESTING_VALUE
           echo $GIT_URL
