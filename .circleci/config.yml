@@ -12,3 +12,6 @@ jobs:
           echo $GIT_URL
           echo $CIRCLE_COMMIT_MESSAGE
           echo $CIRCLE_SHA1
+      - run:
+          name: Print Commit Message
+          command: echo $(git log --format=%B -n 1 $CIRCLE_SHA1)
