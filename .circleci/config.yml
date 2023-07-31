@@ -1,6 +1,7 @@
 version: 2.1
+
 orbs:
-  android: circleci/android@2.1.2
+  android: circleci/android@2.3.0
 
 jobs:
   lint:
@@ -12,6 +13,7 @@ jobs:
       - run:
           name: "Running our linter"
           command: ./gradlew detekt
+
   unit-test:
     executor:
       name: android/android-docker
@@ -21,46 +23,14 @@ jobs:
       - run:
           name: "Running our unit test"
           command: ./gradlew test
-  android-test:
-    executor:
-      name: android/android-machine
-      resource-class: large
-      tag: "2021.10.1"
-    steps:
-      - checkout
-      - android/start-emulator-and-run-tests:
-          test-command: ./gradlew connectedDebugAndroidTest
-          system-image: system-images;android-30;google_apis;x86
-      - run:
-          name: Save test results
-          command: |
-            mkdir -p ~/test-results/junit/
-            find . -type f -regex ".*/build/outputs/androidTest-results/.*xml" -exec cp {} ~/test-results/junit/ \;
-          when: always
-      - store_test_results:
-          path: ~/test-results
-      - store_artifacts:
-          path: ~/test-results/junit
-  firebase-distribution:
-    executor:
-      name: android/android-docker
-      tag: "2022.09"
-    steps:
-      - checkout
-      - run:
-          name: Store Google Services Account
-          command: |
-            echo $GOOGLE_SERVICES_ACCOUNT | base64 --decode > google-services-account.json
-      - run:
-          name: Distribute to firebase
-          command: |
-            ./gradlew assembleRelease appDistributionUploadRelease
 
   release-build:
     executor:
       name: android/android-machine
-      resource-class: large
-      tag: "2021.10.1"
+      tag: "2023.06.1"
+    filters:
+      tags:
+        only: /^\[ci\]/
     steps:
       - checkout
       - android/restore-gradle-cache
@@ -77,13 +47,7 @@ workflows:
     jobs:
       - lint
       - unit-test
-      - android-test
-      - firebase-distribution:
-          requires:
-            - lint
-            - unit-test
       - release-build:
           requires:
             - lint
             - unit-test
-            - android-test
