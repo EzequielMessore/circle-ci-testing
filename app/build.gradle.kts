@@ -103,7 +103,7 @@ dependencies {
 
     //Compose
     implementation("androidx.activity:activity-compose:1.6.1")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.3.3")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.7.4")
 
     //Compose BOM
     implementation(platform("androidx.compose:compose-bom:2022.12.00"))
